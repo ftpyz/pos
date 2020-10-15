@@ -2,7 +2,7 @@
 
 Bu paket ile amaçlanan; ortak bir arayüz sınıfı ile, tüm Türk banka sanal pos sistemlerinin kullanılabilmesidir.
 EST altyapısı tam olarak test edilmiş ve kullanıma hazırdır.
-Garanti Ödeme sistemi çalışmaktadır, fakat 3D ödeme kısmının üretim ortamında test edilmesi gerekiyor.
+Garanti Ödeme sistemi çalışmaktadır, 3D ödeme ve iade seçenekleri üretim ortamında test edildi ve çalıştırıldı.
 YapıKredi Posnet sistemi çalışmaktadır, fakat 3D ödeme kısmının üretim ortamında test edilmesi gerekiyor.
 
 > EST altyapısında olan Akbank ve Ziraat bankası test edilmiştir.
