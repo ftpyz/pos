@@ -207,21 +207,21 @@ class Pos
         return $data;
     }
 
-	/**
-	 * Get Mobile Form Data
-	 *
-	 * @return array
-	 */
-	public function getMobilFormData()
-	{
-		$data = [];
+    /**
+     * Get Mobile Form Data
+     *
+     * @return array
+     */
+    public function getMobilFormData()
+    {
+        $data = [];
 
-		try {
-			$data = $this->bank->getMobilFormData();
-		} catch (Exception $e) {}
+        try {
+            $data = $this->bank->getMobilFormData();
+        } catch (Exception $e) {}
 
-		return $data;
-	}
+        return $data;
+    }
     /**
      * Is success
      *

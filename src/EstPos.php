@@ -306,10 +306,10 @@ class EstPos implements PosInterface
 
         $hashparams_arr = explode(':', $hash_params);
         foreach ($hashparams_arr as $value) {
-			if(!empty($value) && isset($data[$value])){
-				$params_val = $params_val . $data[$value];
-			}
-		}
+            if(!empty($value) && isset($data[$value])){
+                $params_val = $params_val . $data[$value];
+            }
+        }
 
         $hash_val = $params_val . $this->account->store_key;
         $hash = base64_encode(sha1($hash_val, true));

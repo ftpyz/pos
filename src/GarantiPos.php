@@ -65,7 +65,7 @@ class GarantiPos implements PosInterface
         'pay'           => 'sales',
         'pre'           => 'preauth',
         'post'          => 'postauth',
-	    'custom_pay'    => "gpdatarequest",
+        'custom_pay'    => "gpdatarequest",
     ];
 
     /**
@@ -391,10 +391,10 @@ class GarantiPos implements PosInterface
                     'Description'           => '',
                     'OriginalRetrefNum'     => '',
                     'RewardList'        => [
-	                    'Reward'=>[
-		                    'Type'=>'BNS',
-		                    'UsedAmount'    =>  $this->amountFormat($this->order->reward)
-	                    ]
+                        'Reward'=>[
+                            'Type'=>'BNS',
+                            'UsedAmount'    =>  $this->amountFormat($this->order->reward)
+                        ]
                     ]
                 ]
             ]
@@ -593,7 +593,7 @@ class GarantiPos implements PosInterface
             'extra'             => isset($this->data->Extra) ? $this->data->Extra : null,
             'all'               => $this->data,
             'original'          => $this->data,
-	        'reward'            => isset($this->data->Transaction->RewardInqResult->RewardList) ? true : false
+            'reward'            => isset($this->data->Transaction->RewardInqResult->RewardList) ? true : false
         ];
 
         return $this;
@@ -782,55 +782,55 @@ class GarantiPos implements PosInterface
         ];
     }
 
-	/**
-	 * Get Mobile Payment Form Data
-	 *
-	 * @return array
-	 */
-	public function getMobilFormData()
-	{
-		$security_data = $this->makeSecurityData();
-		$hash_data = $this->make3dHashData($security_data);
+    /**
+     * Get Mobile Payment Form Data
+     *
+     * @return array
+     */
+    public function getMobilFormData()
+    {
+        $security_data = $this->makeSecurityData();
+        $hash_data = $this->make3dHashData($security_data);
 
-		$inputs = [
-			'secure3dsecuritylevel' => $this->account->model,
-			'mode'                  => $this->mode,
-			'apiversion'            => $this->version,
-			'terminalprovuserid'    => $this->account->username,
-			'terminaluserid'        => $this->account->client_id,
-			'terminalid'            => $this->account->terminal_id,
-			'terminalmerchantid'    => $this->account->client_id,
-			'txntype'               => $this->type,
-			'txnsubtype'            => "sales",
-			'txnamount'             => $this->amountFormat($this->order->amount),
-			'txncurrencycode'       => $this->order->currency,
-			'txninstallmentcount'   => $this->order->installment > 1 ? $this->order->installment : '',
-			'orderid'               => $this->order->id,
-			'successurl'            => $this->order->success_url,
-			'errorurl'              => $this->order->fail_url,
-			'customeremailaddress'  => isset($this->order->email) ? $this->order->email : null,
-			'customeripaddress'     => $this->order->ip,
-			'secure3dhash'          => $hash_data,
-			'garantipay'            => 'Y',
-			'bnsuseflag'            => $this->account->bnsuseflag,
-			'fbbuseflag'            => 'Y',
-			'chequeuseflag'         => 'Y',
-			'mileuseflag'           => 'Y',
-			'companyname'           => $this->account->company_name,
-			'txntimestamp'          => microtime(),
-			"txntimeoutperiod"      => 10*60, // zaman aşımı
-			"gsmnumber"             => '5358862332',
-		];
+        $inputs = [
+            'secure3dsecuritylevel' => $this->account->model,
+            'mode'                  => $this->mode,
+            'apiversion'            => $this->version,
+            'terminalprovuserid'    => $this->account->username,
+            'terminaluserid'        => $this->account->client_id,
+            'terminalid'            => $this->account->terminal_id,
+            'terminalmerchantid'    => $this->account->client_id,
+            'txntype'               => $this->type,
+            'txnsubtype'            => "sales",
+            'txnamount'             => $this->amountFormat($this->order->amount),
+            'txncurrencycode'       => $this->order->currency,
+            'txninstallmentcount'   => $this->order->installment > 1 ? $this->order->installment : '',
+            'orderid'               => $this->order->id,
+            'successurl'            => $this->order->success_url,
+            'errorurl'              => $this->order->fail_url,
+            'customeremailaddress'  => isset($this->order->email) ? $this->order->email : null,
+            'customeripaddress'     => $this->order->ip,
+            'secure3dhash'          => $hash_data,
+            'garantipay'            => 'Y',
+            'bnsuseflag'            => $this->account->bnsuseflag,
+            'fbbuseflag'            => 'Y',
+            'chequeuseflag'         => 'Y',
+            'mileuseflag'           => 'Y',
+            'companyname'           => $this->account->company_name,
+            'txntimestamp'          => microtime(),
+            "txntimeoutperiod"      => 10*60, // zaman aşımı
+            "gsmnumber"             => '5358862332',
+        ];
 
-		return [
-			'gateway'       => $this->gateway,
-			'success_url'   => $this->order->success_url,
-			'fail_url'      => $this->order->fail_url,
-			'rand'          => $this->order->rand,
-			'hash'          => $hash_data,
-			'inputs'        => $inputs,
-		];
-	}
+        return [
+            'gateway'       => $this->gateway,
+            'success_url'   => $this->order->success_url,
+            'fail_url'      => $this->order->fail_url,
+            'rand'          => $this->order->rand,
+            'hash'          => $hash_data,
+            'inputs'        => $inputs,
+        ];
+    }
     /**
      * Send contents to WebService
      *
@@ -990,97 +990,97 @@ class GarantiPos implements PosInterface
         return $this;
     }
 
-	/**
-	 * reward Request Bonus ex.
-	 *
-	 * @param array $meta
-	 * @return $this
-	 * @throws GuzzleException
-	 */
-	public function reward(array $meta)
-	{
+    /**
+     * reward Request Bonus ex.
+     *
+     * @param array $meta
+     * @return $this
+     * @throws GuzzleException
+     */
+    public function reward(array $meta)
+    {
 
-		$this->order = (object) [
-			'id'        => $meta['order_id'],
-			'amount'    => isset($meta['amount']) ? $meta['amount'] : null,
-		];
-		$this->card =   (object)[
-			"number"=>$meta['number']
-		];
-		$currency = (int) $this->currencies[$meta['currency']];
-		$security_data = $this->makeSecurityData();
+        $this->order = (object) [
+            'id'        => $meta['order_id'],
+            'amount'    => isset($meta['amount']) ? $meta['amount'] : null,
+        ];
+        $this->card =   (object)[
+            "number"=>$meta['number']
+        ];
+        $currency = (int) $this->currencies[$meta['currency']];
+        $security_data = $this->makeSecurityData();
 
-		$hash_data = $this->makeHashData($security_data);
+        $hash_data = $this->makeHashData($security_data);
 
-		$nodes = [
-			'GVPSRequest'   => [
-				'Mode'          => $this->mode,
-				'Version'       => $this->version,
-				'ChannelCode'   => '',
-				'Terminal'      => [
-					'ProvUserID'    => $this->account->username,
-					'UserID'        => $this->account->username,
-					'HashData'      => $hash_data,
-					'ID'            => $this->account->terminal_id,
-					'MerchantID'    => $this->account->client_id,
-				],
-				'Customer'      => [
-					'IPAddress'     => isset($meta['ip']) ? $meta['ip'] : null,
-					'EmailAddress'  => isset($meta['email']) ? $meta['email'] : null,
-				],
-				'Card'              => [
-					'Number'        => $meta["number"],
-					'ExpireDate'    => $meta["month"] . $meta["year"],
-					'CVV2'          => $meta["cvv"],
-				],
-				'Order'         => [
-					'OrderID'   => $meta['order_id'],
-					'GroupID'   => '',
-				],
-				'Transaction'   => [
-					'Type'                  => "rewardinq",
-					'InstallmentCnt'        => '',
-					'Amount'                => $this->amountFormat($this->order->amount),
-					'CurrencyCode'          => $currency,
-					'CardholderPresentCode' => '0',
-					'MotoInd'               => 'N',
-					'OriginalRetrefNum'     => '',
-				],
-			]
-		];
+        $nodes = [
+            'GVPSRequest'   => [
+                'Mode'          => $this->mode,
+                'Version'       => $this->version,
+                'ChannelCode'   => '',
+                'Terminal'      => [
+                    'ProvUserID'    => $this->account->username,
+                    'UserID'        => $this->account->username,
+                    'HashData'      => $hash_data,
+                    'ID'            => $this->account->terminal_id,
+                    'MerchantID'    => $this->account->client_id,
+                ],
+                'Customer'      => [
+                    'IPAddress'     => isset($meta['ip']) ? $meta['ip'] : null,
+                    'EmailAddress'  => isset($meta['email']) ? $meta['email'] : null,
+                ],
+                'Card'              => [
+                    'Number'        => $meta["number"],
+                    'ExpireDate'    => $meta["month"] . $meta["year"],
+                    'CVV2'          => $meta["cvv"],
+                ],
+                'Order'         => [
+                    'OrderID'   => $meta['order_id'],
+                    'GroupID'   => '',
+                ],
+                'Transaction'   => [
+                    'Type'                  => "rewardinq",
+                    'InstallmentCnt'        => '',
+                    'Amount'                => $this->amountFormat($this->order->amount),
+                    'CurrencyCode'          => $currency,
+                    'CardholderPresentCode' => '0',
+                    'MotoInd'               => 'N',
+                    'OriginalRetrefNum'     => '',
+                ],
+            ]
+        ];
 
-		$xml = $this->createXML($nodes);
-		$this->send($xml);
+        $xml = $this->createXML($nodes);
+        $this->send($xml);
 
-		$status = 'declined';
-		if ($this->getProcReturnCode() == '00') {
-			$status = 'approved';
-		}
+        $status = 'declined';
+        if ($this->getProcReturnCode() == '00') {
+            $status = 'approved';
+        }
 
-		$this->response = (object) [
-			'id'                => isset($this->data->Transaction->AuthCode) ? $this->printData($this->data->Transaction->AuthCode) : null,
-			'order_id'          => isset($this->data->Order->OrderID) ? $this->printData($this->data->Order->OrderID) : null,
-			'group_id'          => isset($this->data->Order->GroupID) ? $this->printData($this->data->Order->GroupID) : null,
-			'trans_id'          => isset($this->data->Transaction->AuthCode) ? $this->printData($this->data->Transaction->AuthCode) : null,
-			'response'          => isset($this->data->Transaction->Response->Message) ? $this->printData($this->data->Transaction->Response->Message) : null,
-			'auth_code'         => isset($this->data->Transaction->AuthCode) ? $this->data->Transaction->AuthCode : null,
-			'host_ref_num'      => isset($this->data->Transaction->RetrefNum) ? $this->printData($this->data->Transaction->RetrefNum) : null,
-			'ret_ref_num'       => isset($this->data->Transaction->RetrefNum) ? $this->printData($this->data->Transaction->RetrefNum) : null,
-			'hash_data'         => isset($this->data->Transaction->HashData) ? $this->printData($this->data->Transaction->HashData) : null,
-			'proc_return_code'  => $this->getProcReturnCode(),
-			'code'              => $this->getProcReturnCode(),
-			'error_code'        => isset($this->data->Transaction->Response->Code) ? $this->printData($this->data->Transaction->Response->Code) : null,
-			'error_message'     => isset($this->data->Transaction->Response->ErrorMsg) ? $this->printData($this->data->Transaction->Response->ErrorMsg) : null,
-			'status'            => $status,
-			'status_detail'     => $this->getStatusDetail(),
-			'totalBonus'        => isset($this->data->Transaction->RewardInqResult->RewardList->Reward->TotalAmount) ? $this->printData($this->data->Transaction->RewardInqResult->RewardList->Reward->TotalAmount) : 0,
-			'all'               => $this->data,
-		];
+        $this->response = (object) [
+            'id'                => isset($this->data->Transaction->AuthCode) ? $this->printData($this->data->Transaction->AuthCode) : null,
+            'order_id'          => isset($this->data->Order->OrderID) ? $this->printData($this->data->Order->OrderID) : null,
+            'group_id'          => isset($this->data->Order->GroupID) ? $this->printData($this->data->Order->GroupID) : null,
+            'trans_id'          => isset($this->data->Transaction->AuthCode) ? $this->printData($this->data->Transaction->AuthCode) : null,
+            'response'          => isset($this->data->Transaction->Response->Message) ? $this->printData($this->data->Transaction->Response->Message) : null,
+            'auth_code'         => isset($this->data->Transaction->AuthCode) ? $this->data->Transaction->AuthCode : null,
+            'host_ref_num'      => isset($this->data->Transaction->RetrefNum) ? $this->printData($this->data->Transaction->RetrefNum) : null,
+            'ret_ref_num'       => isset($this->data->Transaction->RetrefNum) ? $this->printData($this->data->Transaction->RetrefNum) : null,
+            'hash_data'         => isset($this->data->Transaction->HashData) ? $this->printData($this->data->Transaction->HashData) : null,
+            'proc_return_code'  => $this->getProcReturnCode(),
+            'code'              => $this->getProcReturnCode(),
+            'error_code'        => isset($this->data->Transaction->Response->Code) ? $this->printData($this->data->Transaction->Response->Code) : null,
+            'error_message'     => isset($this->data->Transaction->Response->ErrorMsg) ? $this->printData($this->data->Transaction->Response->ErrorMsg) : null,
+            'status'            => $status,
+            'status_detail'     => $this->getStatusDetail(),
+            'totalBonus'        => isset($this->data->Transaction->RewardInqResult->RewardList->Reward->TotalAmount) ? $this->printData($this->data->Transaction->RewardInqResult->RewardList->Reward->TotalAmount) : 0,
+            'all'               => $this->data,
+        ];
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
+    /**
      * Refund Order
      *
      * @param $meta

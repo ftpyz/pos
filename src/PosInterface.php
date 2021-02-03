@@ -62,7 +62,7 @@ interface PosInterface
     public function make3DPayPayment();
 
     /**
-     * Make Mobile Payment 
+     * Make Mobile Payment
      *
      * @return $this
      */

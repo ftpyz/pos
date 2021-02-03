@@ -212,23 +212,23 @@ class PosNet implements PosInterface
     }
 
     /**
-	 * Get PrefixedOrderId
-	 * To check the status of an order or cancel/refund order Yapikredi
-	 * - requires the order length to be 24
-	 * - and order id prefix which is "TDSC" for 3D payments
-	 * @return string
-	 */
-	protected function getPrefixedOrderId()
-	{
-	    if($this->account->model == '3d'){
-	        return $this->config['order']['id_3d_prefix'] . $this->getOrderId($this->config['order']['id_total_length'] - strlen($this->config['order']['id_3d_prefix']));
+     * Get PrefixedOrderId
+     * To check the status of an order or cancel/refund order Yapikredi
+     * - requires the order length to be 24
+     * - and order id prefix which is "TDSC" for 3D payments
+     * @return string
+     */
+    protected function getPrefixedOrderId()
+    {
+        if($this->account->model == '3d'){
+            return $this->config['order']['id_3d_prefix'] . $this->getOrderId($this->config['order']['id_total_length'] - strlen($this->config['order']['id_3d_prefix']));
         }elseif($this->account->model == '3d_pay') {
-	        return $this->config['order']['id_3d_pay_prefix'] . $this->getOrderId($this->config['order']['id_total_length'] - strlen($this->config['order']['id_3d_pay_prefix']));
+            return $this->config['order']['id_3d_pay_prefix'] . $this->getOrderId($this->config['order']['id_total_length'] - strlen($this->config['order']['id_3d_pay_prefix']));
         }
-	    return $this->config['order']['id_regular_prefix'] . $this->getOrderId($this->config['order']['id_total_length'] - strlen($this->config['order']['id_regular_prefix']));
-	}
+        return $this->config['order']['id_regular_prefix'] . $this->getOrderId($this->config['order']['id_total_length'] - strlen($this->config['order']['id_regular_prefix']));
+    }
 
-	/**
+    /**
      * Get orderId
      *
      * @param int $pad_length
@@ -236,9 +236,9 @@ class PosNet implements PosInterface
      */
     protected function getOrderId(int $pad_length = null)
     {
-    	if($pad_length === null) $pad_length = $this->config['order']['id_length'];
-		return (string) str_pad($this->order->id, $pad_length, '0', STR_PAD_LEFT);
-	}
+        if($pad_length === null) $pad_length = $this->config['order']['id_length'];
+        return (string) str_pad($this->order->id, $pad_length, '0', STR_PAD_LEFT);
+    }
 
     /**
      * Get Installment
@@ -517,8 +517,8 @@ class PosNet implements PosInterface
         }
 
         if($this->getProcReturnCode() != '00'){
-        	goto end;
-		}
+            goto end;
+        }
 
         if(!$this->verifyResponseMAC($this->data->oosResolveMerchantDataResponse)) {
             goto end;
